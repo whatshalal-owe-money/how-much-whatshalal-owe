@@ -52,11 +52,11 @@
         return interest;
       };
 	
+      amountPaid = 0;
+      amountOwed = (compoundInterest(principal,time,rate,n)+principal+legalfees).toFixed(2)-amountPaid;
 
-    document.getElementById("ompm").innerHTML = dollarSGLocale.format((compoundInterest(principal,time,rate,n)+principal+legalfees).toFixed(2));
+    document.getElementById("ompm").innerHTML = dollarSGLocale.format(amountOwed);
 
-    amountPaid = dollarSGLocale.format(0);
-
-    document.getElementById("paid").innerHTML = amountPaid;
+    document.getElementById("paid").innerHTML = dollarSGLocale.format(amountPaid);
   </script>
 </html>
