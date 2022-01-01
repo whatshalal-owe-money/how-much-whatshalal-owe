@@ -6,12 +6,12 @@
 <body>
 
 <h1 style="text-align: center;">WhatsHalal Debt Tracker</h1>
-<p>On the 27 October 2021, The State Court of the Republic of Singapore has ordered WhatsHalal to pay the plaintiffs in Case Number DC/DC 1266/2021:</p>
+<p>On the 27 October 2021, The State Court of the Republic of Singapore has ordered <a href="https://www.whatshalal.com>WhatsHalal</a> to pay the plaintiffs in Case Number <a href="https://www.courtorders.gov.sg/">DC/DC 1266/2021</a>:</p>
 <p>1. The sum of S$150,000 (Purchase Price) under the terms of agreement dated 28 May 2018.</p>
 <p>2. Interest on the purchase price be fixed at 5.33% per annum and be payable from 15 August 2019 until the purchase price is fully paid.</p>
 <p>3. Legal fees fixed at S$7,000 all-in.</p>
 <p>To this day, they have not paid us.</p>
-<p>We have reached out to WhatsHalal CEO, Messrs Azman Bin Mohamad Shariff@Ivan, Tan Kim Leng and COO, Mohammad Salehin bin Amat Kamsin, but they have not replied us. They also founded OurPasar.</p>
+<p>We have reached out to WhatsHalal CEO, Messrs <a href="https://www.linkedin.com/in/tklivan/">Azman Bin Mohamad Shariff@Ivan, Tan Kim Leng and COO, <a href="https://www.linkedin.com/in/salehin-amat-2834786a/">Mohammad Salehin bin Amat Kamsin</a>, but they have not replied us. They also founded <a href="https://www.ourpasar.com">OurPasar</a>.</p>
 <p>&nbsp;</p>
 <p style="font-size: 20px; text-align: center;">This Tracker shows the real-time amount of money owed with interest. It is automatically updated every second.</p>
 <p style="font-size: 30px; font-weight: bold; text-align: center;">Total Amount Owed: S$<span id="ompm"></span></p>
@@ -27,7 +27,8 @@
        n is the number of times that interest is compounded per unit t, for example if interest is compounded monthly and t is in years then the value of n would be 12. If interest is compounded quarterly and t is in years then the value of n would be 4.
        */
 
-    	let dollarSGLocale = Intl.NumberFormat('en-SG');
+      function realTimeOwed() {
+        let dollarSGLocale = Intl.NumberFormat('en-SG');
     
       var today = new Date();
       var dtStart = new Date('2019-08-15');
@@ -54,9 +55,15 @@
 	
       amountPaid = 0;
       amountOwed = (compoundInterest((principal-amountPaid),time,rate,n)+principal+legalfees).toFixed(2)-amountPaid;
+      document.getElementById("ompm").innerHTML = dollarSGLocale.format(amountOwed);
 
-    document.getElementById("ompm").innerHTML = dollarSGLocale.format(amountOwed);
+      document.getElementById("paid").innerHTML = dollarSGLocale.format(amountPaid);
+      }
+    	
 
-    document.getElementById("paid").innerHTML = dollarSGLocale.format(amountPaid);
+    setInterval(function() {
+      realTimeOwed();
+    }, 1000);
+    
   </script>
 </html>
