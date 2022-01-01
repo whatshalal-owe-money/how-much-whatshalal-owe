@@ -53,7 +53,7 @@
       };
 	
       amountPaid = 0;
-      amountOwed = (compoundInterest(principal,time,rate,n)+principal+legalfees).toFixed(2)-amountPaid;
+      amountOwed = (compoundInterest((principal-amountPaid),time,rate,n)+principal+legalfees).toFixed(2)-amountPaid;
 
     document.getElementById("ompm").innerHTML = dollarSGLocale.format(amountOwed);
 
