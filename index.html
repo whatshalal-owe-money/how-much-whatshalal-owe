@@ -11,19 +11,16 @@
        n is the number of times that interest is compounded per unit t, for example if interest is compounded monthly and t is in years then the value of n would be 12. If interest is compounded quarterly and t is in years then the value of n would be 4.
        */
     
-    const monthsBtwnDates = (startDate, endDate) => {
-    startDate = new Date(startDate);
-    endDate = new Date(endDate);
-      return Math.max(
-        (endDate.getFullYear() - startDate.getFullYear()) * 12 +
-          endDate.getMonth() -
-          startDate.getMonth(),
-        0
-
-      )};
+    function monthDiff(d1, d2) {
+        var months;
+        months = (d2.getFullYear() - d1.getFullYear()) * 12;
+        months -= d1.getMonth();
+        months += d2.getMonth();
+        return months <= 0 ? 0 : months;
+    }
     
     let today = new Date();
-    document.getElementById("ompm").innerHTML = monthsBtwnDates('2019-08-15',today);
+    document.getElementById("ompm").innerHTML = monthDiff('2019-08-15',today);
   </script>
 </head>
 <body>
