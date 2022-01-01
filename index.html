@@ -39,6 +39,7 @@ const principal = 150000;
 const time = monthDiff(new Date('2019-08-15'),today)/12;
 const rate = 5.33/100;
 const n = 1;
+const legalfees = 7000;
 
 const compoundInterest = (p, t, r, n) => {
    const amount = p * (Math.pow((1 + (r / n)), (n * t)));
@@ -47,7 +48,7 @@ const compoundInterest = (p, t, r, n) => {
 };
 	
 
-    document.getElementById("ompm").innerHTML = (compoundInterest(principal,time,rate,n)+principal).toFixed(2);
+    document.getElementById("ompm").innerHTML = (compoundInterest(principal,time,rate,n)+principal+legalfees).toFixed(2);
 
     amountPaid = 0;
 
