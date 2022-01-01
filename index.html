@@ -13,8 +13,9 @@
 <p>To this day, they have not paid us.</p>
 <p>We have reached out to WhatsHalal CEO, Mr Azman Ivan Tan and COO, Mohammad Salehin bin Amat Kamsin, but they have not replied us. They also founded OurPasar.</p>
 <p>&nbsp;</p>
-<p style="font-size: 30px; font-weight: bold; text-align: center;">Total Amount Owed: $<span id="ompm"></span></p>
-<p style="font-size: 30px; font-weight: bold; text-align: center;">Total Amount Paid: $<span id="paid"></span></p>
+<p style="font-size: 20px; text-align: center;">This Tracker shows the real-time amount of money owed with interest. It is automatically updated daily.</p>
+<p style="font-size: 30px; font-weight: bold; text-align: center;">Total Amount Owed: S$<span id="ompm"></span></p>
+<p style="font-size: 30px; font-weight: bold; text-align: center;">Total Amount Paid: S$<span id="paid"></span></p>
 
 </body>
 <script>
@@ -28,26 +29,28 @@
 
     	let dollarSGLocale = Intl.NumberFormat('en-SG');
     
-	var today = new Date();
-	const principal = 150000;
-	const time = monthDiff(new Date('2019-08-15'),today)/12;
-	const rate = 5.33/100;
-	const n = 1;
-	const legalfees = 7000;
+      var today = new Date();
+      var dtStart = new Date('2019-08-15');
+      const principal = 150000;
+      // To calculate the time difference of two dates
+      var timeDiff = today.getTime() - dtStart.getTime();
+        
+      // To calculate the no. of days between two dates
+      var daysDiff = timeDiff / (1000 * 3600 * 24);
+      //const time = monthDiff(new Date('2019-08-15'),today)/12; alert(time);
+      const time = monthsDiff(daysDiff)/12;
+      const rate = 5.33/100;
+      const n = 1;
+      const legalfees = 7000;
 
-	function monthDiff(d1, d2) {
-		var months;
-		months = (d2.getFullYear() - d1.getFullYear()) * 12;
-		months -= d1.getMonth();
-		months += d2.getMonth();
-		return months <= 0 ? 0 : months;
-	}
-	
-	const compoundInterest = (p, t, r, n) => {
-	   const amount = p * (Math.pow((1 + (r / n)), (n * t)));
-	   const interest = amount - p;
-	   return interest;
-	};
+      // To calculate number of months with decimals. This makes the interest rate update in real time.
+      function monthsDiff(d1) { return (d1/365)*12; }
+      
+      const compoundInterest = (p, t, r, n) => {
+        const amount = p * (Math.pow((1 + (r / n)), (n * t)));
+        const interest = amount - p;
+        return interest;
+      };
 	
 
     document.getElementById("ompm").innerHTML = dollarSGLocale.format((compoundInterest(principal,time,rate,n)+principal+legalfees).toFixed(2));
