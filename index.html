@@ -25,32 +25,34 @@
        t is the time the money is invested or borrowed for.
        n is the number of times that interest is compounded per unit t, for example if interest is compounded monthly and t is in years then the value of n would be 12. If interest is compounded quarterly and t is in years then the value of n would be 4.
        */
+
+    	let dollarSGLocale = Intl.NumberFormat('en-SG');
     
-    function monthDiff(d1, d2) {
-        var months;
-        months = (d2.getFullYear() - d1.getFullYear()) * 12;
-        months -= d1.getMonth();
-        months += d2.getMonth();
-        return months <= 0 ? 0 : months;
-    }
+	var today = new Date();
+	const principal = 150000;
+	const time = monthDiff(new Date('2019-08-15'),today)/12;
+	const rate = 5.33/100;
+	const n = 1;
+	const legalfees = 7000;
 
-    var today = new Date();
-const principal = 150000;
-const time = monthDiff(new Date('2019-08-15'),today)/12;
-const rate = 5.33/100;
-const n = 1;
-const legalfees = 7000;
-
-const compoundInterest = (p, t, r, n) => {
-   const amount = p * (Math.pow((1 + (r / n)), (n * t)));
-   const interest = amount - p;
-   return interest;
-};
+	function monthDiff(d1, d2) {
+		var months;
+		months = (d2.getFullYear() - d1.getFullYear()) * 12;
+		months -= d1.getMonth();
+		months += d2.getMonth();
+		return months <= 0 ? 0 : months;
+	}
+	
+	const compoundInterest = (p, t, r, n) => {
+	   const amount = p * (Math.pow((1 + (r / n)), (n * t)));
+	   const interest = amount - p;
+	   return interest;
+	};
 	
 
-    document.getElementById("ompm").innerHTML = (compoundInterest(principal,time,rate,n)+principal+legalfees).toFixed(2);
+    document.getElementById("ompm").innerHTML = dollarSGLocale.format((compoundInterest(principal,time,rate,n)+principal+legalfees).toFixed(2));
 
-    amountPaid = 0;
+    amountPaid = dollarSGLocale.format(0);
 
     document.getElementById("paid").innerHTML = amountPaid;
   </script>
